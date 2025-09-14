@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "windowsx.h": "c",
-        "logger.h": "c"
+        "logger.h": "c",
+        "platform.h": "c"
     }
 }
