@@ -1,13 +1,8 @@
 {
-    "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "windowsx.h": "c",
         "logger.h": "c",
-        "platform.h": "c",
-        "vulkan_backend.h": "c",
-        "renderer_backend.h": "c",
-        "renderer_type.inl": "c",
-        "kstring.h": "c",
+        "vulkan_device.h": "c",
+        "vulkan_platform.h": "c",
         "vulkan_types.inl": "c"
     }
 }
