@@ -1,0 +1,85 @@
+{
+    "workbench.colorTheme": "One Dark Pro",
+
+    "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
+    "editor.minimap.enabled": false,
+
+    // Terminal settings
+    "terminal.integrated.profiles": {
+        "PowerShell": {
+            "path": "C:/Program Files/PowerShell/7/pwsh.exe"
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.defaultLocation": "editor",
+    "terminal.integrated.fontFamily": "Cascadia Code",
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.fontWeight": "1",
+
+    // Editor settings
+    "editor.fontFamily": "Cascadia Code",
+    "editor.fontSize": 13,
+    "editor.fontWeight": "1",
+    "editor.cursorStyle": "block",
+    "editor.lineNumbers": "on",
+    "editor.tabCompletion": "on",
+
+    // Workbench settings
+    "workbench.editor.showTabs": "single",
+    "workbench.statusBar.visible": true,
+    "window.zoomLevel": 0,
+
+    // Colors
+    "workbench.colorCustomizations": {
+        // "editorCursor.foreground": "#00ff33",
+        "editor.lineHighlightBackground": "#111144"
+    },
+
+    // C/C++ formatting
+    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0, NamespaceIndentation: All}",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "sameLine",
+    "C_Cpp.vcFormat.space.pointerReferenceAlignment": "left",
+    "C_Cpp.clang_format_sortIncludes": false,
+    "C_Cpp.vcFormat.indent.namespaceContents": true,
+
+    // Todo highlight
+    "todohighlight.isEnable": true,
+    "todohighlight.keywords": [
+        {
+            "text": "TODO:",
+            "color": "red",
+            "backgroundColor": "rgba(0,0,0,0)"
+        },
+        {
+            "text": "HACK:",
+            "color": "#ff6600",
+            "backgroundColor": "rgba(0,0,0,0)"
+        },
+        {
+            "text": "NOTE:",
+            "color": "green",
+            "backgroundColor": "rgba(0,0,0,0)"
+        }
+    ],
+    "todohighlight.defaultStyle": {
+        "color": "red",
+        "backgroundColor": "#ffab00",
+        "overviewRulerColor": "rgba(0,0,0,0)",
+        "isWholeLine": false
+    },
+
+    // File associations
+    "files.associations": {
+        "test.h": "c",
+        "vulkan.h": "c",
+        "vulkan_core.h": "c",
+        "vk_platform.h": "c",
+        "type_traits": "c",
+        "typeinfo": "c",
+        "windowsx.h": "c",
+        "vulkan_platform.h": "c",
+        "renderer_frontend.h": "c"
+    }
+}
