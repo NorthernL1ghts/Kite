@@ -6,6 +6,7 @@
         "platform.h": "c",
         "vulkan_backend.h": "c",
         "renderer_backend.h": "c",
-        "renderer_type.inl": "c"
+        "renderer_type.inl": "c",
+        "kstring.h": "c"
     }
 }
