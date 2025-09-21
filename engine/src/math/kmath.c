@@ -9,7 +9,7 @@ static b8 rand_seeded = FALSE;
 /**
  * Note that these are here in order to prevent having to import the
  * entire <math.h> everywhere.
- */
+*/
 f32 ksin(f32 x) {
     return sinf(x);
 }
