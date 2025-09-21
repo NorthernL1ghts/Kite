@@ -1,3 +1,3 @@
-# KITE
+# Kite Engine
 
-### The Kite Game Engine!
+The Kite Game Engine
