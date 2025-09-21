@@ -37,12 +37,11 @@ b8 platform_startup(
     i32 y,
     i32 width,
     i32 height) {
-
     plat_state->internal_state = malloc(sizeof(internal_state));
     internal_state *state = (internal_state *)plat_state->internal_state;
 
     state->h_instance = GetModuleHandleA(0);
-    
+
     // Setup and register window class.
     HICON icon = LoadIcon(state->h_instance, IDI_APPLICATION);
     WNDCLASSA wc;
@@ -55,7 +54,7 @@ b8 platform_startup(
     wc.hIcon = icon;
     wc.hCursor = LoadCursor(NULL, IDC_ARROW);  // NULL; // Manage the cursor manually
     wc.hbrBackground = NULL;                   // Transparent
-    wc.lpszClassName = "kite_window_class";
+    wc.lpszClassName = "kohi_window_class";
 
     if (!RegisterClassA(&wc)) {
         MessageBoxA(0, "Window registration failed", "Error", MB_ICONEXCLAMATION | MB_OK);
@@ -93,10 +92,10 @@ b8 platform_startup(
     window_height += border_rect.bottom - border_rect.top;
 
     HWND handle = CreateWindowExA(
-        window_ex_style, "kite_window_class", application_name,
+        window_ex_style, "kohi_window_class", application_name,
         window_style, window_x, window_y, window_width, window_height,
         0, 0, state->h_instance, 0);
-    
+
     if (handle == 0) {
         MessageBoxA(NULL, "Window creation failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
 
@@ -164,8 +163,8 @@ void *platform_set_memory(void *dest, i32 value, u64 size) {
 
 void platform_console_write(const char *message, u8 colour) {
     HANDLE console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    // FATAL, ERROR, WARN, INFO, DEBUG, TRACE
-    static u8 levels[6] = { 64, 4, 6, 2, 1, 8 };
+    // FATAL,ERROR,WARN,INFO,DEBUG,TRACE
+    static u8 levels[6] = {64, 4, 6, 2, 1, 8};
     SetConsoleTextAttribute(console_handle, levels[colour]);
     OutputDebugStringA(message);
     u64 length = strlen(message);
@@ -175,8 +174,8 @@ void platform_console_write(const char *message, u8 colour) {
 
 void platform_console_write_error(const char *message, u8 colour) {
     HANDLE console_handle = GetStdHandle(STD_ERROR_HANDLE);
-    // FATAL, ERROR, WARN, INFO, DEBUG, TRACE
-    static u8 levels[6] = { 64, 4, 6, 2, 1, 8 };
+    // FATAL,ERROR,WARN,INFO,DEBUG,TRACE
+    static u8 levels[6] = {64, 4, 6, 2, 1, 8};
     SetConsoleTextAttribute(console_handle, levels[colour]);
     OutputDebugStringA(message);
     u64 length = strlen(message);
@@ -232,12 +231,17 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
             return 0;
         case WM_SIZE: {
             // Get the updated size.
-            // RECT r;
-            // GetClientRect(hwnd, &r);
-            // u32 width = r.right - r.left;
-            // u32 height = r.bottom - r.top;
+            RECT r;
+            GetClientRect(hwnd, &r);
+            u32 width = r.right - r.left;
+            u32 height = r.bottom - r.top;
 
-            // TODO: Fire an event for window resize.
+            // Fire the event. The application layer should pick this up, but not handle it
+            // as it shouldn be visible to other parts of the application.
+            event_context context;
+            context.data.u16[0] = (u16)width;
+            context.data.u16[1] = (u16)height;
+            event_fire(EVENT_CODE_RESIZED, 0, context);
         } break;
         case WM_KEYDOWN:
         case WM_SYSKEYDOWN:
@@ -246,7 +250,7 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
             // Key pressed/released
             b8 pressed = (msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN);
             keys key = (u16)w_param;
-            
+
             // Pass to the input subsystem for processing.
             input_process_key(key, pressed);
         } break;
@@ -299,4 +303,4 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
     return DefWindowProcA(hwnd, msg, w_param, l_param);
 }
 
-#endif // KPLATFORM_WINDOWS
+#endif  // KPLATFORM_WINDOWS

@@ -86,6 +86,9 @@
         "utility": "cpp",
         "kmemory.h": "c",
         "defines.h": "c",
-        "vulkan_framebuffer.h": "c"
+        "vulkan_framebuffer.h": "c",
+        "vulkan_utils.h": "c",
+        "vulkan_types.inl": "c",
+        "asserts.h": "c"
     }
 }

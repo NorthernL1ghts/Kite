@@ -40,7 +40,6 @@ b8 vulkan_swapchain_acquire_next_image_index(
     VkSemaphore image_available_semaphore,
     VkFence fence,
     u32* out_image_index) {
-
     VkResult result = vkAcquireNextImageKHR(
         context->device.logical_device,
         swapchain->handle,
@@ -68,7 +67,6 @@ void vulkan_swapchain_present(
     VkQueue present_queue,
     VkSemaphore render_complete_semaphore,
     u32 present_image_index) {
-
     // Return the image to the swapchain for presentation.
     VkPresentInfoKHR present_info = {VK_STRUCTURE_TYPE_PRESENT_INFO_KHR};
     present_info.waitSemaphoreCount = 1;
@@ -110,7 +108,6 @@ void create(vulkan_context* context, u32 width, u32 height, vulkan_swapchain* sw
     if (!found) {
         swapchain->image_format = context->device.swapchain_support.formats[0];
     }
-
 
     VkPresentModeKHR present_mode = VK_PRESENT_MODE_FIFO_KHR;
     for (u32 i = 0; i < context->device.swapchain_support.present_mode_count; ++i) {
@@ -228,6 +225,7 @@ void create(vulkan_context* context, u32 width, u32 height, vulkan_swapchain* sw
 }
 
 void destroy(vulkan_context* context, vulkan_swapchain* swapchain) {
+    vkDeviceWaitIdle(context->device.logical_device);
     vulkan_image_destroy(context, &swapchain->depth_attachment);
 
     // Only destroy the views, not the images, since those are owned by the swapchain and are thus
