@@ -1,5 +1,7 @@
-# Kite
+# KITE
 
-![Kite's LOGO](resources/branding/LOGO.png)
+### The Kite Game Engine!
 
-The Kite Game Engine
+```
+
+```
