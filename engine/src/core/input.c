@@ -55,11 +55,15 @@ void input_process_key(keys key, b8 pressed) {
             KINFO("Left Alt pressed.");
         } else if (key == KEY_RALT) {
             KINFO("Right Alt pressed.");
-        } else if (key == KEY_LCONTROL) {
+        }
+
+        if (key == KEY_LCONTROL) {
             KINFO("Left Control pressed.");
         } else if (key == KEY_RCONTROL) {
             KINFO("Right Control pressed.");
-        } else if (key == KEY_LSHIFT) {
+        }
+
+        if (key == KEY_LSHIFT) {
             KINFO("Left Shift pressed.");
         } else if (key == KEY_RSHIFT) {
             KINFO("Right Shift pressed.");
