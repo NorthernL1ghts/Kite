@@ -51,6 +51,20 @@ void input_process_key(keys key, b8 pressed) {
         // Update internal state.
         state.keyboard_current.keys[key] = pressed;
 
+        if (key == KEY_LALT) {
+            KINFO("Left Alt pressed.");
+        } else if (key == KEY_RALT) {
+            KINFO("Right Alt pressed.");
+        } else if (key == KEY_LCONTROL) {
+            KINFO("Left Control pressed.");
+        } else if (key == KEY_RCONTROL) {
+            KINFO("Right Control pressed.");
+        } else if (key == KEY_LSHIFT) {
+            KINFO("Left Shift pressed.");
+        } else if (key == KEY_RSHIFT) {
+            KINFO("Right Shift pressed.");
+        }
+
         // Fire off an event for immediate processing.
         event_context context;
         context.data.u16[0] = key;

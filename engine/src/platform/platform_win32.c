@@ -251,6 +251,27 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
             b8 pressed = (msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN);
             keys key = (u16)w_param;
 
+            // Alt Key
+            if (w_param == VK_MENU) {
+               if (GetKeyState(VK_RMENU) & 0x8000) {
+                   key = KEY_RALT;
+               } else if (GetKeyState(VK_LMENU) & 0x8000) {
+                   key = KEY_LALT;
+               }
+            } else if (w_param == VK_SHIFT) {
+               if (GetKeyState(VK_RSHIFT) & 0x8000) {
+                   key = KEY_RSHIFT;
+               } else if (GetKeyState(VK_LSHIFT) & 0x8000) {
+                   key = KEY_LSHIFT;
+               }
+            } else if (w_param == VK_CONTROL) {
+               if (GetKeyState(VK_RCONTROL) & 0x8000) {
+                   key = KEY_RCONTROL;
+               } else if (GetKeyState(VK_LCONTROL) & 0x8000) {
+                   key = KEY_LCONTROL;
+               }
+            }
+
             // Pass to the input subsystem for processing.
             input_process_key(key, pressed);
         } break;
@@ -258,7 +279,7 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
             // Mouse move
             i32 x_position = GET_X_LPARAM(l_param);
             i32 y_position = GET_Y_LPARAM(l_param);
-            
+
             // Pass over to the input subsystem.
             input_process_mouse_move(x_position, y_position);
         } break;
