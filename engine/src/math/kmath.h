@@ -2,6 +2,7 @@
 
 #include "defines.h"
 #include "math_types.h"
+
 #include "core/kmemory.h"
 
 #define K_PI 3.14159265358979323846f
@@ -43,7 +44,7 @@ KAPI f32 kabs(f32 x);
  * Indicates if the value is a power of 2. 0 is considered _not_ a power of 2.
  * @param value The value to be interpreted.
  * @returns True if a power of 2, otherwise false.
-*/
+ */
 KINLINE b8 is_power_of_2(u64 value) {
     return (value != 0) && ((value & (value - 1)) == 0);
 }
@@ -64,7 +65,7 @@ KAPI f32 fkrandom_in_range(f32 min, f32 max);
  * @param x The x value.
  * @param y The y value.
  * @return A new 2-element vector.
-*/
+ */
 KINLINE vec2 vec2_create(f32 x, f32 y) {
     vec2 out_vector;
     out_vector.x = x;
@@ -74,42 +75,42 @@ KINLINE vec2 vec2_create(f32 x, f32 y) {
 
 /**
  * @brief Creates and returns a 2-component vector with all components set to 0.0f.
-*/
+ */
 KINLINE vec2 vec2_zero() {
     return (vec2){0.0f, 0.0f};
 }
 
 /**
  * @brief Creates and returns a 2-component vector with all components set to 1.0f.
-*/
+ */
 KINLINE vec2 vec2_one() {
     return (vec2){1.0f, 1.0f};
 }
 
 /**
  * @brief Creates and returns a 2-component vector pointing up (0, 1).
-*/
+ */
 KINLINE vec2 vec2_up() {
     return (vec2){0.0f, 1.0f};
 }
 
 /**
  * @brief Creates and returns a 2-component vector pointing down (0, -1).
-*/
+ */
 KINLINE vec2 vec2_down() {
     return (vec2){0.0f, -1.0f};
 }
 
 /**
  * @brief Creates and returns a 2-component vector pointing left (-1, 0).
-*/
+ */
 KINLINE vec2 vec2_left() {
     return (vec2){-1.0f, 0.0f};
 }
 
 /**
  * @brief Creates and returns a 2-component vector pointing right (1, 0).
-*/
+ */
 KINLINE vec2 vec2_right() {
     return (vec2){1.0f, 0.0f};
 }
@@ -120,7 +121,7 @@ KINLINE vec2 vec2_right() {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec2 vec2_add(vec2 vector_0, vec2 vector_1) {
     return (vec2){
         vector_0.x + vector_1.x,
@@ -133,7 +134,7 @@ KINLINE vec2 vec2_add(vec2 vector_0, vec2 vector_1) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec2 vec2_sub(vec2 vector_0, vec2 vector_1) {
     return (vec2){
         vector_0.x - vector_1.x,
@@ -146,7 +147,7 @@ KINLINE vec2 vec2_sub(vec2 vector_0, vec2 vector_1) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec2 vec2_mul(vec2 vector_0, vec2 vector_1) {
     return (vec2){
         vector_0.x * vector_1.x,
@@ -159,7 +160,7 @@ KINLINE vec2 vec2_mul(vec2 vector_0, vec2 vector_1) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec2 vec2_div(vec2 vector_0, vec2 vector_1) {
     return (vec2){
         vector_0.x / vector_1.x,
@@ -171,7 +172,7 @@ KINLINE vec2 vec2_div(vec2 vector_0, vec2 vector_1) {
  * 
  * @param vector The vector to retrieve the squared length of.
  * @return The squared length.
-*/
+ */
 KINLINE f32 vec2_length_squared(vec2 vector) {
     return vector.x * vector.x + vector.y * vector.y;
 }
@@ -181,7 +182,7 @@ KINLINE f32 vec2_length_squared(vec2 vector) {
  * 
  * @param vector The vector to retrieve the length of.
  * @return The length.
-*/
+ */
 KINLINE f32 vec2_length(vec2 vector) {
     return ksqrt(vec2_length_squared(vector));
 }
@@ -190,7 +191,7 @@ KINLINE f32 vec2_length(vec2 vector) {
  * @brief Normalizes the provided vector in place to a unit vector.
  * 
  * @param vector A pointer to the vector to be normalized.
-*/
+ */
 KINLINE void vec2_normalize(vec2* vector) {
     const f32 length = vec2_length(*vector);
     vector->x /= length;
@@ -202,7 +203,7 @@ KINLINE void vec2_normalize(vec2* vector) {
  * 
  * @param vector The vector to be normalized.
  * @return A normalized copy of the supplied vector 
-*/
+ */
 KINLINE vec2 vec2_normalized(vec2 vector) {
     vec2_normalize(&vector);
     return vector;
@@ -216,17 +217,17 @@ KINLINE vec2 vec2_normalized(vec2 vector) {
  * @param vector_1 The second vector.
  * @param tolerance The difference tolerance. Typically K_FLOAT_EPSILON or similar.
  * @return True if within tolerance; otherwise false. 
-*/
+ */
 KINLINE b8 vec2_compare(vec2 vector_0, vec2 vector_1, f32 tolerance) {
     if (kabs(vector_0.x - vector_1.x) > tolerance) {
-        return FALSE;
+        return false;
     }
 
     if (kabs(vector_0.y - vector_1.y) > tolerance) {
-        return FALSE;
+        return false;
     }
 
-    return TRUE;
+    return true;
 }
 
 /**
@@ -235,7 +236,7 @@ KINLINE b8 vec2_compare(vec2 vector_0, vec2 vector_1, f32 tolerance) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The distance between vector_0 and vector_1.
-*/
+ */
 KINLINE f32 vec2_distance(vec2 vector_0, vec2 vector_1) {
     vec2 d = (vec2){
         vector_0.x - vector_1.x,
@@ -254,7 +255,7 @@ KINLINE f32 vec2_distance(vec2 vector_0, vec2 vector_1) {
  * @param y The y value.
  * @param z The z value.
  * @return A new 3-element vector.
-*/
+ */
 KINLINE vec3 vec3_create(f32 x, f32 y, f32 z) {
     return (vec3){x, y, z};
 }
@@ -276,63 +277,63 @@ KINLINE vec3 vec3_from_vec4(vec4 vector) {
  * @param vector The 3-component vector.
  * @param w The w component.
  * @return A new vec4 
-*/
+ */
 KINLINE vec4 vec3_to_vec4(vec3 vector, f32 w) {
     return (vec4){vector.x, vector.y, vector.z, w};
 }
 
 /**
  * @brief Creates and returns a 3-component vector with all components set to 0.0f.
-*/
+ */
 KINLINE vec3 vec3_zero() {
     return (vec3){0.0f, 0.0f, 0.0f};
 }
 
 /**
  * @brief Creates and returns a 3-component vector with all components set to 1.0f.
-*/
+ */
 KINLINE vec3 vec3_one() {
     return (vec3){1.0f, 1.0f, 1.0f};
 }
 
 /**
  * @brief Creates and returns a 3-component vector pointing up (0, 1, 0).
-*/
+ */
 KINLINE vec3 vec3_up() {
     return (vec3){0.0f, 1.0f, 0.0f};
 }
 
 /**
  * @brief Creates and returns a 3-component vector pointing down (0, -1, 0).
-*/
+ */
 KINLINE vec3 vec3_down() {
     return (vec3){0.0f, -1.0f, 0.0f};
 }
 
 /**
  * @brief Creates and returns a 3-component vector pointing left (-1, 0, 0).
-*/
+ */
 KINLINE vec3 vec3_left() {
     return (vec3){-1.0f, 0.0f, 0.0f};
 }
 
 /**
  * @brief Creates and returns a 3-component vector pointing right (1, 0, 0).
-*/
+ */
 KINLINE vec3 vec3_right() {
     return (vec3){1.0f, 0.0f, 0.0f};
 }
 
 /**
  * @brief Creates and returns a 3-component vector pointing forward (0, 0, -1).
-*/
+ */
 KINLINE vec3 vec3_forward() {
     return (vec3){0.0f, 0.0f, -1.0f};
 }
 
 /**
  * @brief Creates and returns a 3-component vector pointing backward (0, 0, 1).
-*/
+ */
 KINLINE vec3 vec3_back() {
     return (vec3){0.0f, 0.0f, 1.0f};
 }
@@ -343,7 +344,7 @@ KINLINE vec3 vec3_back() {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec3 vec3_add(vec3 vector_0, vec3 vector_1) {
     return (vec3){
         vector_0.x + vector_1.x,
@@ -357,7 +358,7 @@ KINLINE vec3 vec3_add(vec3 vector_0, vec3 vector_1) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec3 vec3_sub(vec3 vector_0, vec3 vector_1) {
     return (vec3){
         vector_0.x - vector_1.x,
@@ -371,7 +372,7 @@ KINLINE vec3 vec3_sub(vec3 vector_0, vec3 vector_1) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec3 vec3_mul(vec3 vector_0, vec3 vector_1) {
     return (vec3){
         vector_0.x * vector_1.x,
@@ -385,7 +386,7 @@ KINLINE vec3 vec3_mul(vec3 vector_0, vec3 vector_1) {
  * @param vector_0 The vector to be multiplied.
  * @param scalar The scalar value.
  * @return A copy of the resulting vector.
-*/
+ */
 KINLINE vec3 vec3_mul_scalar(vec3 vector_0, f32 scalar) {
     return (vec3){
         vector_0.x * scalar,
@@ -399,7 +400,7 @@ KINLINE vec3 vec3_mul_scalar(vec3 vector_0, f32 scalar) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec3 vec3_div(vec3 vector_0, vec3 vector_1) {
     return (vec3){
         vector_0.x / vector_1.x,
@@ -412,7 +413,7 @@ KINLINE vec3 vec3_div(vec3 vector_0, vec3 vector_1) {
  * 
  * @param vector The vector to retrieve the squared length of.
  * @return The squared length.
-*/
+ */
 KINLINE f32 vec3_length_squared(vec3 vector) {
     return vector.x * vector.x + vector.y * vector.y + vector.z * vector.z;
 }
@@ -422,7 +423,7 @@ KINLINE f32 vec3_length_squared(vec3 vector) {
  * 
  * @param vector The vector to retrieve the length of.
  * @return The length.
-*/
+ */
 KINLINE f32 vec3_length(vec3 vector) {
     return ksqrt(vec3_length_squared(vector));
 }
@@ -431,7 +432,7 @@ KINLINE f32 vec3_length(vec3 vector) {
  * @brief Normalizes the provided vector in place to a unit vector.
  * 
  * @param vector A pointer to the vector to be normalized.
-*/
+ */
 KINLINE void vec3_normalize(vec3* vector) {
     const f32 length = vec3_length(*vector);
     vector->x /= length;
@@ -444,7 +445,7 @@ KINLINE void vec3_normalize(vec3* vector) {
  * 
  * @param vector The vector to be normalized.
  * @return A normalized copy of the supplied vector 
-*/
+ */
 KINLINE vec3 vec3_normalized(vec3 vector) {
     vec3_normalize(&vector);
     return vector;
@@ -457,7 +458,7 @@ KINLINE vec3 vec3_normalized(vec3 vector) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The dot product. 
-*/
+ */
 KINLINE f32 vec3_dot(vec3 vector_0, vec3 vector_1) {
     f32 p = 0;
     p += vector_0.x * vector_1.x;
@@ -473,7 +474,7 @@ KINLINE f32 vec3_dot(vec3 vector_0, vec3 vector_1) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The cross product. 
-*/
+ */
 KINLINE vec3 vec3_cross(vec3 vector_0, vec3 vector_1) {
     return (vec3){
         vector_0.y * vector_1.z - vector_0.z * vector_1.y,
@@ -489,21 +490,21 @@ KINLINE vec3 vec3_cross(vec3 vector_0, vec3 vector_1) {
  * @param vector_1 The second vector.
  * @param tolerance The difference tolerance. Typically K_FLOAT_EPSILON or similar.
  * @return True if within tolerance; otherwise false. 
-*/
+ */
 KINLINE const b8 vec3_compare(vec3 vector_0, vec3 vector_1, f32 tolerance) {
     if (kabs(vector_0.x - vector_1.x) > tolerance) {
-        return FALSE;
+        return false;
     }
 
     if (kabs(vector_0.y - vector_1.y) > tolerance) {
-        return FALSE;
+        return false;
     }
 
     if (kabs(vector_0.z - vector_1.z) > tolerance) {
-        return FALSE;
+        return false;
     }
 
-    return TRUE;
+    return true;
 }
 
 /**
@@ -512,7 +513,7 @@ KINLINE const b8 vec3_compare(vec3 vector_0, vec3 vector_1, f32 tolerance) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The distance between vector_0 and vector_1.
-*/
+ */
 KINLINE f32 vec3_distance(vec3 vector_0, vec3 vector_1) {
     vec3 d = (vec3){
         vector_0.x - vector_1.x,
@@ -534,7 +535,7 @@ KINLINE f32 vec3_distance(vec3 vector_0, vec3 vector_1) {
  * @param z The z value.
  * @param w The w value.
  * @return A new 4-element vector.
-*/
+ */
 KINLINE vec4 vec4_create(f32 x, f32 y, f32 z, f32 w) {
     vec4 out_vector;
 #if defined(KUSE_SIMD)
@@ -554,7 +555,7 @@ KINLINE vec4 vec4_create(f32 x, f32 y, f32 z, f32 w) {
  * 
  * @param vector The 4-component vector to extract from.
  * @return A new vec3 
-*/
+ */
 KINLINE vec3 vec4_to_vec3(vec4 vector) {
     return (vec3){vector.x, vector.y, vector.z};
 }
@@ -565,7 +566,7 @@ KINLINE vec3 vec4_to_vec3(vec4 vector) {
  * @param vector The 3-component vector.
  * @param w The w component.
  * @return A new vec4 
-*/
+ */
 KINLINE vec4 vec4_from_vec3(vec3 vector, f32 w) {
 #if defined(KUSE_SIMD)
     vec4 out_vector;
@@ -578,14 +579,14 @@ KINLINE vec4 vec4_from_vec3(vec3 vector, f32 w) {
 
 /**
  * @brief Creates and returns a 3-component vector with all components set to 0.0f.
-*/
+ */
 KINLINE vec4 vec4_zero() {
     return (vec4){0.0f, 0.0f, 0.0f, 0.0f};
 }
 
 /**
  * @brief Creates and returns a 3-component vector with all components set to 1.0f.
-*/
+ */
 KINLINE vec4 vec4_one() {
     return (vec4){1.0f, 1.0f, 1.0f, 1.0f};
 }
@@ -596,7 +597,7 @@ KINLINE vec4 vec4_one() {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec4 vec4_add(vec4 vector_0, vec4 vector_1) {
     vec4 result;
      for (u64 i = 0; i < 4; ++i) {
@@ -611,7 +612,7 @@ KINLINE vec4 vec4_add(vec4 vector_0, vec4 vector_1) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec4 vec4_sub(vec4 vector_0, vec4 vector_1) {
     vec4 result;
     for (u64 i = 0; i < 4; ++i) {
@@ -626,7 +627,7 @@ KINLINE vec4 vec4_sub(vec4 vector_0, vec4 vector_1) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec4 vec4_mul(vec4 vector_0, vec4 vector_1) {
     vec4 result;
     for (u64 i = 0; i < 4; ++i) {
@@ -641,7 +642,7 @@ KINLINE vec4 vec4_mul(vec4 vector_0, vec4 vector_1) {
  * @param vector_0 The first vector.
  * @param vector_1 The second vector.
  * @return The resulting vector. 
-*/
+ */
 KINLINE vec4 vec4_div(vec4 vector_0, vec4 vector_1) {
     vec4 result;
     for (u64 i = 0; i < 4; ++i) {
@@ -655,7 +656,7 @@ KINLINE vec4 vec4_div(vec4 vector_0, vec4 vector_1) {
  * 
  * @param vector The vector to retrieve the squared length of.
  * @return The squared length.
-*/
+ */
 KINLINE f32 vec4_length_squared(vec4 vector) {
     return vector.x * vector.x + vector.y * vector.y + vector.z * vector.z + vector.w * vector.w;
 }
@@ -665,7 +666,7 @@ KINLINE f32 vec4_length_squared(vec4 vector) {
  * 
  * @param vector The vector to retrieve the length of.
  * @return The length.
-*/
+ */
 KINLINE f32 vec4_length(vec4 vector) {
     return ksqrt(vec4_length_squared(vector));
 }
@@ -674,7 +675,7 @@ KINLINE f32 vec4_length(vec4 vector) {
  * @brief Normalizes the provided vector in place to a unit vector.
  * 
  * @param vector A pointer to the vector to be normalized.
-*/
+ */
 KINLINE void vec4_normalize(vec4* vector) {
     const f32 length = vec4_length(*vector);
     vector->x /= length;
@@ -688,7 +689,7 @@ KINLINE void vec4_normalize(vec4* vector) {
  * 
  * @param vector The vector to be normalized.
  * @return A normalized copy of the supplied vector 
-*/ 
+ */
 KINLINE vec4 vec4_normalized(vec4 vector) {
     vec4_normalize(&vector);
     return vector;
@@ -717,7 +718,7 @@ KINLINE f32 vec4_dot_f32(
  * }
  * 
  * @return A new identity matrix 
-*/
+ */
 KINLINE mat4 mat4_identity() {
     mat4 out_matrix;
     kzero_memory(out_matrix.data, sizeof(f32) * 16);
@@ -734,7 +735,7 @@ KINLINE mat4 mat4_identity() {
  * @param matrix_0 The first matrix to be multiplied.
  * @param matrix_1 The second matrix to be multiplied.
  * @return The result of the matrix multiplication.
-*/
+ */
 KINLINE mat4 mat4_mul(mat4 matrix_0, mat4 matrix_1) {
     mat4 out_matrix = mat4_identity();
 
@@ -757,7 +758,6 @@ KINLINE mat4 mat4_mul(mat4 matrix_0, mat4 matrix_1) {
 }
 
 /**
- * 
  * @brief Creates and returns an orthographic projection matrix. Typically used to
  * render flat or 2D scenes.
  * 
@@ -768,7 +768,7 @@ KINLINE mat4 mat4_mul(mat4 matrix_0, mat4 matrix_1) {
  * @param near_clip The near clipping plane distance.
  * @param far_clip The far clipping plane distance.
  * @return A new orthographic projection matrix. 
-*/
+ */
 KINLINE mat4 mat4_orthographic(f32 left, f32 right, f32 bottom, f32 top, f32 near_clip, f32 far_clip) {
     mat4 out_matrix = mat4_identity();
 
@@ -794,7 +794,7 @@ KINLINE mat4 mat4_orthographic(f32 left, f32 right, f32 bottom, f32 top, f32 nea
  * @param near_clip The near clipping plane distance.
  * @param far_clip The far clipping plane distance.
  * @return A new perspective matrix. 
-*/
+ */
 KINLINE mat4 mat4_perspective(f32 fov_radians, f32 aspect_ratio, f32 near_clip, f32 far_clip) {
     f32 half_tan_fov = ktan(fov_radians * 0.5f);
     mat4 out_matrix;
@@ -815,7 +815,7 @@ KINLINE mat4 mat4_perspective(f32 fov_radians, f32 aspect_ratio, f32 near_clip, 
  * @param target The position to "look at".
  * @param up The up vector.
  * @return A matrix looking at target from the perspective of position. 
-*/
+ */
 KINLINE mat4 mat4_look_at(vec3 position, vec3 target, vec3 up) {
     mat4 out_matrix;
     vec3 z_axis;
@@ -852,7 +852,7 @@ KINLINE mat4 mat4_look_at(vec3 position, vec3 target, vec3 up) {
  * 
  * @param matrix The matrix to be transposed.
  * @return A transposed copy of of the provided matrix.
-*/
+ */
 KINLINE mat4 mat4_transposed(mat4 matrix) {
     mat4 out_matrix = mat4_identity();
     out_matrix.data[0] = matrix.data[0];
@@ -879,7 +879,7 @@ KINLINE mat4 mat4_transposed(mat4 matrix) {
  * 
  * @param matrix The matrix to be inverted.
  * @return A inverted copy of the provided matrix. 
-*/
+ */
 KINLINE mat4 mat4_inverse(mat4 matrix) {
     const f32* m = matrix.data;
 
@@ -951,7 +951,7 @@ KINLINE mat4 mat4_translation(vec3 position) {
  * 
  * @param scale The 3-component scale.
  * @return A scale matrix.
-*/
+ */
 KINLINE mat4 mat4_scale(vec3 scale) {
     mat4 out_matrix = mat4_identity();
     out_matrix.data[0] = scale.x;
@@ -971,7 +971,6 @@ KINLINE mat4 mat4_euler_x(f32 angle_radians) {
     out_matrix.data[10] = c;
     return out_matrix;
 }
-
 KINLINE mat4 mat4_euler_y(f32 angle_radians) {
     mat4 out_matrix = mat4_identity();
     f32 c = kcos(angle_radians);
@@ -983,7 +982,6 @@ KINLINE mat4 mat4_euler_y(f32 angle_radians) {
     out_matrix.data[10] = c;
     return out_matrix;
 }
-
 KINLINE mat4 mat4_euler_z(f32 angle_radians) {
     mat4 out_matrix = mat4_identity();
 
@@ -996,7 +994,6 @@ KINLINE mat4 mat4_euler_z(f32 angle_radians) {
     out_matrix.data[5] = c;
     return out_matrix;
 }
-
 KINLINE mat4 mat4_euler_xyz(f32 x_radians, f32 y_radians, f32 z_radians) {
     mat4 rx = mat4_euler_x(x_radians);
     mat4 ry = mat4_euler_y(y_radians);
@@ -1011,7 +1008,7 @@ KINLINE mat4 mat4_euler_xyz(f32 x_radians, f32 y_radians, f32 z_radians) {
  * 
  * @param matrix The matrix from which to base the vector.
  * @return A 3-component directional vector.
-*/
+ */
 KINLINE vec3 mat4_forward(mat4 matrix) {
     vec3 forward;
     forward.x = -matrix.data[2];
@@ -1026,7 +1023,7 @@ KINLINE vec3 mat4_forward(mat4 matrix) {
  * 
  * @param matrix The matrix from which to base the vector.
  * @return A 3-component directional vector.
-*/
+ */
 KINLINE vec3 mat4_backward(mat4 matrix) {
     vec3 backward;
     backward.x = matrix.data[2];
@@ -1041,7 +1038,7 @@ KINLINE vec3 mat4_backward(mat4 matrix) {
  * 
  * @param matrix The matrix from which to base the vector.
  * @return A 3-component directional vector.
-*/
+ */
 KINLINE vec3 mat4_up(mat4 matrix) {
     vec3 up;
     up.x = matrix.data[1];
@@ -1056,7 +1053,7 @@ KINLINE vec3 mat4_up(mat4 matrix) {
  * 
  * @param matrix The matrix from which to base the vector.
  * @return A 3-component directional vector.
-*/
+ */
 KINLINE vec3 mat4_down(mat4 matrix) {
     vec3 down;
     down.x = -matrix.data[1];
@@ -1071,14 +1068,14 @@ KINLINE vec3 mat4_down(mat4 matrix) {
  * 
  * @param matrix The matrix from which to base the vector.
  * @return A 3-component directional vector.
-*/
+ */
 KINLINE vec3 mat4_left(mat4 matrix) {
-    vec3 right;
-    right.x = -matrix.data[0];
-    right.y = -matrix.data[4];
-    right.z = -matrix.data[8];
-    vec3_normalize(&right);
-    return right;
+    vec3 left;
+    left.x = -matrix.data[0];
+    left.y = -matrix.data[4];
+    left.z = -matrix.data[8];
+    vec3_normalize(&left);
+    return left;
 }
 
 /**
@@ -1086,14 +1083,14 @@ KINLINE vec3 mat4_left(mat4 matrix) {
  * 
  * @param matrix The matrix from which to base the vector.
  * @return A 3-component directional vector.
-*/
+ */
 KINLINE vec3 mat4_right(mat4 matrix) {
-    vec3 left;
-    left.x = matrix.data[0];
-    left.y = matrix.data[4];
-    left.z = matrix.data[8];
-    vec3_normalize(&left);
-    return left;
+    vec3 right;
+    right.x = matrix.data[0];
+    right.y = matrix.data[4];
+    right.z = matrix.data[8];
+    vec3_normalize(&right);
+    return right;
 }
 
 // ------------------------------------------
@@ -1284,7 +1281,7 @@ KINLINE quat quat_slerp(quat q_0, quat q_1, f32 percentage) {
  * 
  * @param degrees The degrees to be converted.
  * @return The amount in radians.
-*/
+ */
 KINLINE f32 deg_to_rad(f32 degrees) {
     return degrees * K_DEG2RAD_MULTIPLIER;
 }
@@ -1294,7 +1291,7 @@ KINLINE f32 deg_to_rad(f32 degrees) {
  * 
  * @param radians The radians to be converted.
  * @return The amount in degrees.
-*/
+ */
 KINLINE f32 rad_to_deg(f32 radians) {
     return radians * K_RAD2DEG_MULTIPLIER;
 }

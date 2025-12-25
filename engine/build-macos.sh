@@ -11,7 +11,7 @@ cFilenames=$(find . -type f -name "*.c")
 
 assembly="engine"
 compilerFlags="-g -shared -fdeclspec -fPIC"
-# -fms-extensions
+# -fms-extensions 
 # -Wall -Werror
 includeFlags="-Isrc -I$VULKAN_SDK/include"
 linkerFlags="-lvulkan -lglfw -L$VULKAN_SDK/lib"
